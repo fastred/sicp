@@ -1,0 +1,12 @@
+(define (cont-frac n d k)
+  (define (cont-frac-iter i result)
+    (let ((n_k (n i))
+        (d_k (d i)))
+        (cond ((= i 0) result)
+              ((= i k) (/ n_k d_k))
+              (else (cont-frac-iter (- i 1) result)))))
+  (cont-frac-iter k 0))
+
+(/ 1 (cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           7))
