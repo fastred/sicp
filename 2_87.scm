@@ -1,0 +1,10 @@
+(define (install-polynomial-package)
+  (define (zero-poly? p)
+    (define (zero-termlist? terms)
+      (or (empty-termlist? terms)
+        (and (=zero? (coeff (first-term terms)))
+             (zero-termlist? (rest-terms terms)))))
+    (zero-termlist? (term-list p)))
+  (put '=zero? '(polynomial) (lambda (p) (zero-poly? p)))
+
+(define (=zero? x) (apply-generic '=zero? x))
