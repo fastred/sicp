@@ -26,4 +26,5 @@
   (* (* (- x2 x1) (- y2 y1)) (monte-carlo trials experiment)))
 
 ; area of a circle with radius 2 (needs floating point numbers to more accurate)
-(estimate-integral (lambda (x y) (< (+ (* x x) (* y y)) 4)) -5 5 -5 5 5000)
+(define area (estimate-integral (lambda (x y) (<= (+ (* x x) (* y y)) 4)) -5 5 -5 5 5000))
+(define pi (/ area 4))
