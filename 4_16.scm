@@ -1,0 +1,42 @@
+(load "4_6.scm")
+
+(define (lookup-variable-value var env)
+  (define (env-loop env)
+    (define (scan vars vals)
+      (cond ((null? vars)
+             (env-loop (enclosing-environment env)))
+            ((eq? var (car vars))
+             (if (eq? (car vals) '*unassigned*)
+               (error ("*unassigned* symbol -- lookup-variable-value"))
+               (car vals)))
+            (else (scan (cdr vars) (cdr vals)))))
+    (if (eq? env the-empty-environment)
+        (error "Unbound variable" var)
+        (let ((frame (first-frame env)))
+          (scan (frame-variables frame)
+                (frame-values frame)))))
+  (env-loop env))
+
+(define (make-let-unassigned definition)
+  (list (definition-variable definition) ''*unassigned*))
+
+(define (make-let-set! definition)
+  (list 'set! (definition-variable definition) (definition-value definition)))
+
+(define (scan-out-defines body)
+  (let ((definitions (filter definition? body))
+        (rest-of-body (filter (lambda (a) (not (definition? a))) body)))
+    (if (null? definitions)
+      body
+      (list (cons 'let (cons (map make-let-unassigned definitions)
+            (append (map make-let-set! definitions)
+                    rest-of-body)))))))
+
+(define (make-procedure parameters body env)
+  (list 'procedure parameters (scan-out-defines body) env))
+
+;(define the-global-environment (setup-environment))
+;(eval '((lambda ()
+             ;(define u 1)
+             ;(define v 2)
+             ;(+ u v))) the-global-environment)
