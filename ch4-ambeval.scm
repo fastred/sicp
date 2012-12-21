@@ -309,6 +309,7 @@
         (list 'list-ref list-ref)
         (list 'random random)
         (list 'length length)
+        (list 'even? even?)
         ))
 
 
