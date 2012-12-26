@@ -1,7 +1,7 @@
 (load "ch4-leval.scm")
 
 ; for (define (x a (b lazy) c)
-; returns (a (b lazy) c)
+; returns (a b c)
 (define (procedure-parameters p)
   (map (lambda (x)
          (if (pair? x)
@@ -10,7 +10,7 @@
        (cadr p)))
 
 ; for (define (x a (b lazy) c)
-; returns (a b c)
+; returns (a (b lazy) c)
 (define (procedure-parameters-raw p) (cadr p))
 
 (define (apply procedure arguments env)
