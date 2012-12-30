@@ -31,9 +31,9 @@
 
 (define x (make-vect 1 3))
 
-(xcor-vect x)
-(ycor-vect x)
-(add-vect x x)
-(sub-vect x (make-vect 1 1))
-(scale-vect 5 x)
+;(xcor-vect x)
+;(ycor-vect x)
+;(add-vect x x)
+;(sub-vect x (make-vect 1 1))
+;(scale-vect 5 x)
 
