@@ -32,7 +32,7 @@ we get:
 a = 1
 k = 40
 b = 1
-Formula for S(b) is as:
+Formula for S(n):
 S(n) = S(n-1) + S(n-2) + 40
 
 
