@@ -10,5 +10,5 @@
   (let ((deviation (* (/ p 100) c)))
     (make-interval (- c deviation) (+ c deviation))))
 
-(define intr (make-center-percent 5 15))
-(percent intr)
+;(define intr (make-center-percent 5 15))
+;(percent intr)
