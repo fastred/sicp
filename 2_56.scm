@@ -61,8 +61,10 @@
                          (multiplicand exp))))
         ((exponentiation? exp)
          (make-product
-           (exponent exp)
-           (make-exponentiation (base exp) (make-sum (exponent exp) -1))))
+           (make-product (deriv (base exp) var)
+                         (exponent exp))
+           (make-exponentiation (base exp)
+                                (make-sum (exponent exp) -1))))
         (else
           (error "Nieznany rodzaj wyrażenia -- DERIV exp"))))
 
@@ -72,7 +74,7 @@
 
 (deriv '(* (* x y) (+ x 3)) 'x)
 
-(deriv '(** x 5) 'x)
+(deriv '(** (* 2 x) 5) 'x)
 
 (deriv '(** x y) 'x)
 
